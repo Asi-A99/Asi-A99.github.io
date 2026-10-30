@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Asintha Ariyarathne | Embedded Systems Engineer</title>
+<meta name="description" content="Embedded systems engineer working across firmware, embedded Linux and power electronics hardware. Based in Kandy, Sri Lanka.">
+<meta property="og:title" content="Asintha Ariyarathne | Embedded Systems Engineer">
+<meta property="og:description" content="Firmware, embedded Linux and power electronics hardware.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230F2B30'/%3E%3Cpath d='M3 16 C8 4 12 4 16 16 S24 28 29 16' fill='none' stroke='%2352D3DB' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #EEF2F2;
+    --ink: #14252B;
+    --muted: #4A5D63;
+    --accent: #0B6E78;
+    --accent-ink: #FFFFFF;
+    --rule: #C9D4D6;
+    --frame: #E1E8E9;
+    --scope: #0F2B30;
+    --ch1: #F2C230;
+    --ch2: #52D3DB;
+    --grid: rgba(190, 226, 228, 0.13);
+    --grid-mid: rgba(190, 226, 228, 0.32);
+    --display: "Barlow Condensed", "Arial Narrow", sans-serif;
+    --body: "Barlow", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #10191C;
+      --ink: #E3ECEE;
+      --muted: #9DB0B5;
+      --accent: #5FC9D2;
+      --accent-ink: #0B1C20;
+      --rule: #2A3A3F;
+      --frame: #17262A;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font: 400 1.0625rem/1.6 var(--body);
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); text-underline-offset: 3px; }
+  a:hover { text-decoration-thickness: 2px; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+  img { max-width: 100%; }
+
+  .wrap { max-width: 72rem; margin: 0 auto; padding-inline: clamp(1rem, 4vw, 2rem); }
+
+  .skip {
+    position: absolute; left: 1rem; top: -3rem;
+    background: var(--accent); color: var(--accent-ink);
+    padding: .5rem .9rem; border-radius: 4px; z-index: 10;
+  }
+  .skip:focus { top: 1rem; }
+
+  /* Top bar */
+  .topbar { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding-block: 1.25rem; flex-wrap: wrap; }
+  .topbar .home { font-family: var(--display); font-weight: 600; font-size: 1.2rem; color: var(--ink); text-decoration: none; }
+  .topbar nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 1.25rem; flex-wrap: wrap; }
+  .topbar nav a { color: var(--muted); text-decoration: none; font-weight: 500; }
+  .topbar nav a:hover { color: var(--ink); }
+
+  /* Hero */
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+    padding-block: clamp(2rem, 6vw, 4.5rem) clamp(3rem, 7vw, 5.5rem);
+  }
+  .hero h1 {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: clamp(3.1rem, 8vw, 5.6rem);
+    line-height: .92;
+    letter-spacing: -0.01em;
+    margin: 0 0 1.1rem;
+  }
+  .hero .role { font-size: 1.3rem; font-weight: 500; line-height: 1.4; margin: 0 0 1rem; max-width: 30rem; }
+  .hero .intro { color: var(--muted); margin: 0 0 1.75rem; max-width: 34rem; }
+  .actions { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem; }
+  .actions .links { display: inline-flex; gap: 1.1rem; padding-inline: .25rem; font-weight: 600; }
+  .btn {
+    display: inline-block; padding: .65rem 1.1rem; border-radius: 4px;
+    font-weight: 600; text-decoration: none; border: 1.5px solid var(--accent);
+  }
+  .btn-primary { background: var(--accent); color: var(--accent-ink); }
+  .btn-primary:hover { filter: brightness(1.08); }
+  .btn-secondary { color: var(--accent); }
+  .btn-secondary:hover { background: color-mix(in srgb, var(--accent) 10%, transparent); }
+
+  /* Oscilloscope */
+  .scope-fig { margin: 0; }
+  .scope {
+    background: var(--scope);
+    border-radius: 10px;
+    padding: clamp(.5rem, 1.5vw, .9rem);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .06), 0 18px 40px -24px rgba(15, 43, 48, .55);
+  }
+  .scope svg { display: block; width: 100%; height: auto; }
+  .scope .g { stroke: var(--grid); stroke-width: 1; }
+  .scope .g-mid { stroke: var(--grid-mid); }
+  .scope .frame { fill: none; stroke: var(--grid-mid); stroke-width: 1.5; }
+  .scope .pwm { fill: none; stroke: var(--ch2); stroke-width: 1.6; stroke-linejoin: miter; opacity: .9; }
+  .scope .sine { fill: none; stroke: var(--ch1); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+  .scope text { font-family: var(--display); font-weight: 500; font-size: 19px; }
+  .scope .t1 { fill: var(--ch1); }
+  .scope .t2 { fill: var(--ch2); }
+  .scope .t3 { fill: rgba(220, 238, 240, .7); }
+  .scope-fig figcaption { color: var(--muted); font-size: .92rem; margin-top: .75rem; max-width: 36rem; }
+  @media (prefers-reduced-motion: no-preference) {
+    .scope .trace { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 2s cubic-bezier(.4, 0, .2, 1) .25s forwards; }
+    .scope .sine.trace { animation-duration: 1.4s; animation-delay: 1.6s; }
+    @keyframes draw { to { stroke-dashoffset: 0; } }
+  }
+
+  /* Sections */
+  .section { border-top: 1px solid var(--rule); padding-block: clamp(3rem, 7vw, 4.5rem); scroll-margin-top: 1rem; }
+  .section h2 {
+    font-family: var(--display); font-weight: 600;
+    font-size: clamp(2rem, 4vw, 2.6rem); line-height: 1.05;
+    margin: 0 0 .5rem;
+  }
+  .section .lede { color: var(--muted); margin: 0 0 2.25rem; max-width: 40rem; }
+
+  /* Projects */
+  .project {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: clamp(1.25rem, 4vw, 2.75rem);
+    align-items: start;
+    padding-block: 2rem;
+    border-top: 1px solid var(--rule);
+  }
+  .project:first-of-type { border-top: 0; padding-top: 0; }
+  .shot {
+    position: relative; margin: 0; aspect-ratio: 4 / 3;
+    background: var(--frame); border-radius: 6px; overflow: hidden;
+  }
+  .shot img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .shot .ph {
+    display: none; position: absolute; inset: 0;
+    align-items: center; justify-content: center; text-align: center;
+    padding: 1rem; font-size: .9rem; color: var(--muted);
+    border: 1.5px dashed var(--rule); border-radius: 6px;
+  }
+  .shot.missing img { display: none; }
+  .shot.missing .ph { display: flex; }
+  .project h3 { font-family: var(--display); font-weight: 600; font-size: 1.75rem; line-height: 1.1; margin: 0 0 .25rem; }
+  .project .context { color: var(--muted); font-size: .95rem; margin: 0 0 .9rem; }
+  .project p { margin: 0 0 .9rem; max-width: 40rem; }
+  .project .built { color: var(--muted); font-size: .95rem; }
+  .project .built strong { color: var(--ink); font-weight: 600; }
+
+  /* Experience */
+  .job {
+    display: grid;
+    grid-template-columns: 10rem minmax(0, 1fr);
+    gap: 1.5rem;
+    padding-block: 1.6rem;
+    border-top: 1px solid var(--rule);
+  }
+  .job:first-of-type { border-top: 0; padding-top: 0; }
+  .job .when { color: var(--muted); font-size: .95rem; font-variant-numeric: tabular-nums; padding-top: .2rem; }
+  .job h3 { font-family: var(--display); font-weight: 600; font-size: 1.5rem; line-height: 1.15; margin: 0; }
+  .job .org { color: var(--muted); margin: 0 0 .6rem; }
+  .job ul { margin: 0; padding-left: 1.1rem; max-width: 44rem; }
+  .job li { margin-bottom: .35rem; }
+
+  /* Skills */
+  .skills { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.75rem 3.5rem; margin: 0; }
+  .skills div { max-width: 32rem; }
+  .skills dt { font-weight: 600; margin-bottom: .25rem; }
+  .skills dd { margin: 0; color: var(--muted); }
+
+  /* Education */
+  .edu { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem 3.5rem; }
+  .edu h3 { font-family: var(--display); font-weight: 600; font-size: 1.4rem; margin: 0 0 .35rem; }
+  .edu p, .edu ul { margin: 0; color: var(--muted); }
+  .edu ul { padding-left: 1.1rem; }
+
+  /* Contact */
+  .contact .email {
+    display: inline-block;
+    font-family: var(--display); font-weight: 600;
+    font-size: clamp(1.7rem, 5vw, 3rem); line-height: 1.1;
+    margin: .5rem 0 1.5rem; word-break: break-word;
+  }
+  .contact ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .75rem 1.75rem; }
+  .contact li a { font-weight: 600; }
+
+  footer { color: var(--muted); font-size: .9rem; padding-block: 2rem 3rem; border-top: 1px solid var(--rule); }
+
+  @media (max-width: 800px) {
+    .hero { grid-template-columns: minmax(0, 1fr); }
+    .project { grid-template-columns: minmax(0, 1fr); }
+    .job { grid-template-columns: minmax(0, 1fr); gap: .35rem; }
+    .skills, .edu { grid-template-columns: minmax(0, 1fr); }
+    .topbar nav ul { gap: .9rem; }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!--
+  HOW TO EDIT THIS PAGE
+  1. Photos: create a folder named "images" next to this file and add the photos named below
+     (e.g. images/gan-npc-inverter.jpg). Until a photo is added, a dashed placeholder shows its file name.
+  2. CV: create a folder named "cv" and upload your CV as cv/Asintha_Ariyarathne_CV.pdf
+     (remove your home address before publishing it online).
+  3. GitHub: replace Asi-A99 below with your GitHub username.
+  4. Project links: when a project has its own GitHub repository, remove the comment marks
+     around its "Project files on GitHub" link and update the address.
+-->
+
+<div class="wrap">
+  <header class="topbar">
+    <a class="home" href="#top">Asintha Ariyarathne</a>
+    <nav aria-label="Sections">
+      <ul>
+        <li><a href="#work">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div>
+        <h1>Asintha Ariyarathne</h1>
+        <p class="role">Embedded systems engineer working across firmware, embedded Linux and power electronics hardware.</p>
+        <p class="intro">I work where software meets hardware: Linux platforms for ARM networking processors, real-time control firmware, and the multi-layer boards it runs on. Based in Kandy, Sri Lanka, and open to embedded, firmware and systems roles, on-site or remote.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="cv/Asintha_Ariyarathne_CV.pdf">Download CV</a>
+          <a class="btn btn-secondary" href="mailto:asintha.99@outlook.com">Email me</a>
+          <span class="links">
+            <a href="https://www.linkedin.com/in/asintha-ariyarathne-54450b245/">LinkedIn</a>
+            <a href="https://github.com/Asi-A99">GitHub</a>
+          </span>
+        </div>
+      </div>
+
+      <figure class="scope-fig">
+        <div class="scope">
+          <svg viewBox="0 0 600 320" role="img" aria-labelledby="scope-title">
+            <title id="scope-title">Oscilloscope view of a three-level PWM signal and the sine wave it averages to</title>
+            <line class="g" x1="60" y1="0" x2="60" y2="320"/>
+            <line class="g" x1="120" y1="0" x2="120" y2="320"/>
+            <line class="g" x1="180" y1="0" x2="180" y2="320"/>
+            <line class="g" x1="240" y1="0" x2="240" y2="320"/>
+            <line class="g g-mid" x1="300" y1="0" x2="300" y2="320"/>
+            <line class="g" x1="360" y1="0" x2="360" y2="320"/>
+            <line class="g" x1="420" y1="0" x2="420" y2="320"/>
+            <line class="g" x1="480" y1="0" x2="480" y2="320"/>
+            <line class="g" x1="540" y1="0" x2="540" y2="320"/>
+            <line class="g" x1="0" y1="40" x2="600" y2="40"/>
+            <line class="g" x1="0" y1="80" x2="600" y2="80"/>
+            <line class="g" x1="0" y1="120" x2="600" y2="120"/>
+            <line class="g g-mid" x1="0" y1="160" x2="600" y2="160"/>
+            <line class="g" x1="0" y1="200" x2="600" y2="200"/>
+            <line class="g" x1="0" y1="240" x2="600" y2="240"/>
+            <line class="g" x1="0" y1="280" x2="600" y2="280"/>
+            <rect class="frame" x="0.75" y="0.75" width="598.5" height="318.5" rx="2"/>
+            <path class="pwm trace" pathLength="1" d="M0 160.0H17.1V60.0H24.2V160.0H34.4V60.0H47.1V160.0H52.4V60.0H68.4V160.0H71.5V60.0H88.2V160.0H92.0V60.0H106.7V160.0H114.2V60.0H124.3V160.0H137.9V60.0H141.5V160.0H158.5V260.0H162.2V160.0H175.7V260.0H185.8V160.0H193.4V260.0H208.0V160.0H211.9V260.0H228.5V160.0H231.6V260.0H247.6V160.0H253.0V260.0H265.7V160.0H275.9V260.0H283.0V160.0H317.1V60.0H324.2V160.0H334.4V60.0H347.1V160.0H352.5V60.0H368.5V160.0H371.6V60.0H388.2V160.0H392.1V60.0H406.7V160.0H414.3V60.0H424.4V160.0H437.9V60.0H441.6V160.0H458.5V260.0H462.2V160.0H475.7V260.0H485.8V160.0H493.4V260.0H508.0V160.0H511.9V260.0H528.5V160.0H531.6V260.0H547.6V160.0H553.0V260.0H565.7V160.0H575.9V260.0H583.0V160.0H600"/>
+            <polyline class="sine trace" pathLength="1" points="0,160.0 3,154.7 6,149.3 9,144.1 12,138.9 15,133.7 18,128.7 21,123.8 24,119.1 27,114.5 30,110.0 33,105.8 36,101.8 39,98.0 42,94.5 45,91.2 48,88.2 51,85.5 54,83.1 57,81.0 60,79.2 63,77.7 66,76.5 69,75.7 72,75.2 75,75.0 78,75.2 81,75.7 84,76.5 87,77.7 90,79.2 93,81.0 96,83.1 99,85.5 102,88.2 105,91.2 108,94.5 111,98.0 114,101.8 117,105.8 120,110.0 123,114.5 126,119.1 129,123.8 132,128.7 135,133.7 138,138.9 141,144.1 144,149.3 147,154.7 150,160.0 153,165.3 156,170.7 159,175.9 162,181.1 165,186.3 168,191.3 171,196.2 174,200.9 177,205.5 180,210.0 183,214.2 186,218.2 189,222.0 192,225.5 195,228.8 198,231.8 201,234.5 204,236.9 207,239.0 210,240.8 213,242.3 216,243.5 219,244.3 222,244.8 225,245.0 228,244.8 231,244.3 234,243.5 237,242.3 240,240.8 243,239.0 246,236.9 249,234.5 252,231.8 255,228.8 258,225.5 261,222.0 264,218.2 267,214.2 270,210.0 273,205.5 276,200.9 279,196.2 282,191.3 285,186.3 288,181.1 291,175.9 294,170.7 297,165.3 300,160.0 303,154.7 306,149.3 309,144.1 312,138.9 315,133.7 318,128.7 321,123.8 324,119.1 327,114.5 330,110.0 333,105.8 336,101.8 339,98.0 342,94.5 345,91.2 348,88.2 351,85.5 354,83.1 357,81.0 360,79.2 363,77.7 366,76.5 369,75.7 372,75.2 375,75.0 378,75.2 381,75.7 384,76.5 387,77.7 390,79.2 393,81.0 396,83.1 399,85.5 402,88.2 405,91.2 408,94.5 411,98.0 414,101.8 417,105.8 420,110.0 423,114.5 426,119.1 429,123.8 432,128.7 435,133.7 438,138.9 441,144.1 444,149.3 447,154.7 450,160.0 453,165.3 456,170.7 459,175.9 462,181.1 465,186.3 468,191.3 471,196.2 474,200.9 477,205.5 480,210.0 483,214.2 486,218.2 489,222.0 492,225.5 495,228.8 498,231.8 501,234.5 504,236.9 507,239.0 510,240.8 513,242.3 516,243.5 519,244.3 522,244.8 525,245.0 528,244.8 531,244.3 534,243.5 537,242.3 540,240.8 543,239.0 546,236.9 549,234.5 552,231.8 555,228.8 558,225.5 561,222.0 564,218.2 567,214.2 570,210.0 573,205.5 576,200.9 579,196.2 582,191.3 585,186.3 588,181.1 591,175.9 594,170.7 597,165.3 600,160.0"/>
+            <text class="t1" x="12" y="27">CH1 sine reference</text>
+            <text class="t2" x="588" y="27" text-anchor="end">CH2 inverter output</text>
+            <text class="t3" x="12" y="306">Three-level PWM, m = 0.85</text>
+          </svg>
+        </div>
+        <figcaption>Three-level PWM and the sine it averages to: the switching pattern behind the GaN inverter below.</figcaption>
+      </figure>
+    </section>
+
+    <section class="section" id="work" aria-labelledby="work-h">
+      <h2 id="work-h">Projects</h2>
+      <p class="lede">Hardware and firmware I designed, built and debugged, from control loops to the copper they run on.</p>
+
+      <article class="project">
+        <figure class="shot">
+          <img src="images/gan-npc-inverter.jpg" alt="GaN three-level NPC inverter prototype board" onerror="this.parentElement.classList.add('missing')">
+          <figcaption class="ph">Add a photo: images/gan-npc-inverter.jpg</figcaption>
+        </figure>
+        <div>
+          <h3>Three-level NPC solar inverter with GaN devices</h3>
+          <p class="context">Single-phase solar PV inverter, university project</p>
+          <p>A high-efficiency neutral-point-clamped inverter built on GaN power devices. I derived a cascaded dual-loop PI controller, validated it in PLECS, and wrote the full firmware stack on a TI C2000: CLA-based real-time control, a state machine, fault detection and SPI communication.</p>
+          <p>Early boards suffered from gate-drive noise, Miller-effect coupling and ground bounce. I traced each cause on the bench, fixed them with a full PCB redesign, and confirmed the cooling design with thermal simulation.</p>
+          <p class="built"><strong>Built with</strong> TI C2000 and CLA, C, PLECS, Fusion 360, thermal simulation</p>
+          <!-- <p><a href="https://github.com/Asi-A99/gan-npc-inverter">Project files on GitHub</a></p> -->
+        </div>
+      </article>
+
+      <article class="project">
+        <figure class="shot">
+          <img src="images/cdte-microinverter.jpg" alt="Microinverter and battery unit for a CdTe/CdS solar module" onerror="this.parentElement.classList.add('missing')">
+          <figcaption class="ph">Add a photo: images/cdte-microinverter.jpg</figcaption>
+        </figure>
+        <div>
+          <h3>Microinverter for CdTe/CdS solar modules</h3>
+          <p class="context">Final-year project, University of Peradeniya</p>
+          <p>An off-grid microinverter designed for CdTe/CdS solar modules manufactured in Sri Lanka. It combines the inverter, a battery with a battery management system and a load-tracking algorithm into one compact unit mounted with the module, to make clean energy easier to access.</p>
+          <p class="built"><strong>Built with</strong> MATLAB/Simulink, PSIM, PLECS, Altium Designer, battery management, thermal design</p>
+          <!-- <p><a href="https://github.com/Asi-A99/cdte-microinverter">Project files on GitHub</a></p> -->
+        </div>
+      </article>
+
+      <article class="project">
+        <figure class="shot">
+          <img src="images/offgrid-inverter.jpg" alt="Schematic or simulation of the off-grid solar inverter" onerror="this.parentElement.classList.add('missing')">
+          <figcaption class="ph">Add a photo: images/offgrid-inverter.jpg</figcaption>
+        </figure>
+        <div>
+          <h3>Low-cost off-grid solar inverter</h3>
+          <p class="context">Power conversion design project</p>
+          <p>An interleaved push-pull DC-DC converter feeding a full-bridge inverter stage. I designed and optimised the transformer and inductors, selected the power and control ICs, drew the complete schematic, and validated converter and control behaviour through simulation.</p>
+          <p class="built"><strong>Built with</strong> PLECS, TINA-TI, magnetics design, schematic and PCB design</p>
+          <!-- <p><a href="https://github.com/Asi-A99/offgrid-inverter">Project files on GitHub</a></p> -->
+        </div>
+      </article>
+
+      <article class="project">
+        <figure class="shot">
+          <img src="images/esp32-scada.jpg" alt="ESP32 conveyor monitoring setup with the SCADA dashboard" onerror="this.parentElement.classList.add('missing')">
+          <figcaption class="ph">Add a photo: images/esp32-scada.jpg</figcaption>
+        </figure>
+        <div>
+          <h3>SCADA system for a conveyor belt</h3>
+          <p class="context">Industrial automation project</p>
+          <p>Monitors and controls a conveyor automatically when a package is detected. An ESP32 acts as both the data-acquisition device and an OPC-UA server, communicating over Wi-Fi with an Ignition SCADA client that shows live data and controls on a PC.</p>
+          <p class="built"><strong>Built with</strong> ESP32, ESP-IDF, C/C++, OPC-UA, Ignition SCADA</p>
+          <!-- <p><a href="https://github.com/Asi-A99/esp32-opcua-scada">Project files on GitHub</a></p> -->
+        </div>
+      </article>
+
+      <article class="project">
+        <figure class="shot">
+          <img src="images/smart-iron.jpg" alt="Smart clothing iron PCB and enclosure" onerror="this.parentElement.classList.add('missing')">
+          <figcaption class="ph">Add a photo: images/smart-iron.jpg</figcaption>
+        </figure>
+        <div>
+          <h3>Smart clothing iron</h3>
+          <p class="context">Product design project</p>
+          <p>An iron that detects the fabric automatically and sets the right temperature, protecting clothes and preventing dangerous overheating.</p>
+          <p class="built"><strong>Built with</strong> Altium Designer, SolidWorks, C/C++</p>
+        </div>
+      </article>
+    </section>
+
+    <section class="section" id="experience" aria-labelledby="exp-h">
+      <h2 id="exp-h">Experience</h2>
+      <p class="lede">Most recent first.</p>
+
+      <article class="job">
+        <p class="when">Sep 2026 – Oct 2026</p>
+        <div>
+          <h3>Embedded Software Engineer</h3>
+          <p class="org">Thakshana Technologies (Pvt) Ltd</p>
+          <ul>
+            <li>Built custom Yocto Linux images, meta-layers and cross-compilation SDK toolchains for the NXP LS1088A, a 64-bit ARM networking processor.</li>
+            <li>Customised the early-boot stack (RCW/PBI, TF-A and U-Boot) and worked on kernel drivers, device tree configuration and secure boot.</li>
+            <li>Validated hardware at schematic level, including CPLD boot-muxing logic and QSPI/SD flash interfaces.</li>
+            <li>Managed work in Git with CI/CD pipelines.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="job">
+        <p class="when">Oct 2025 – Sep 2026</p>
+        <div>
+          <h3>Electronic Engineer</h3>
+          <p class="org">Vega Innovations (Pvt) Ltd</p>
+          <ul>
+            <li>Developed real-time control firmware using interrupt architectures and finite state machines.</li>
+            <li>Implemented SPI, SCI and CAN communication between embedded systems and peripherals.</li>
+            <li>Designed multi-layer PCBs for high-power applications, focusing on signal integrity, EMI reduction, ground loops and heat dissipation.</li>
+            <li>Tested and debugged hardware with oscilloscopes, logic analysers and power analysers, and ran thermal simulations to validate heatsink and forced-air cooling.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="job">
+        <p class="when">Aug 2024 – Oct 2024</p>
+        <div>
+          <h3>Electrical Engineering Intern</h3>
+          <p class="org">South Asia Gateway Terminals (SAGT)</p>
+          <ul>
+            <li>Troubleshot and repaired electrical systems on quay cranes and rubber-tyred gantry cranes, including cable reels, motors, limit and proximity sensors, and encoders.</li>
+            <li>Wrote PLC programs in Ladder, STL and FBD, including emergency-recovery logic for crane movement.</li>
+            <li>Contributed to a PLC upgrade of a pump house and a feasibility study for solar power on RTG girders.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="job">
+        <p class="when">Aug 2023 – Oct 2023</p>
+        <div>
+          <h3>Electrical Engineering Intern</h3>
+          <p class="org">Diesel and Motor Engineering PLC</p>
+          <ul>
+            <li>Coordinated a 21.09 kW solar PV installation from start to finish.</li>
+            <li>Serviced and repaired generators, including winding reinsulation, megger testing and controller configuration.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="job">
+        <p class="when">2021 – present</p>
+        <div>
+          <h3>Physics Tutor</h3>
+          <p class="org">AA Physics (self-employed, part-time)</p>
+          <ul>
+            <li>Teach physics for the local and Edexcel syllabuses, planning lessons and keeping students motivated.</li>
+          </ul>
+        </div>
+      </article>
+    </section>
+
+    <section class="section" id="skills" aria-labelledby="skills-h">
+      <h2 id="skills-h">Skills</h2>
+      <p class="lede">Tools and techniques I've used in real projects.</p>
+      <dl class="skills">
+        <div>
+          <dt>Embedded Linux</dt>
+          <dd>Yocto Project and BitBake meta-layers, U-Boot, TF-A, RCW/PBI, Linux kernel drivers, device tree, secure boot</dd>
+        </div>
+        <div>
+          <dt>Firmware</dt>
+          <dd>C and C++, TI C2000 with CLA, ESP32 with ESP-IDF, RTOS, interrupt-driven state machines</dd>
+        </div>
+        <div>
+          <dt>Interfaces and protocols</dt>
+          <dd>SPI, I2C, UART/SCI, CAN, Wi-Fi, OPC-UA</dd>
+        </div>
+        <div>
+          <dt>Hardware and PCB design</dt>
+          <dd>Altium Designer, Fusion 360, multi-layer layout, signal integrity, EMI reduction, thermal design</dd>
+        </div>
+        <div>
+          <dt>Power electronics</dt>
+          <dd>GaN devices, NPC and full-bridge inverters, DC-DC converters, magnetics design, PI control, battery management</dd>
+        </div>
+        <div>
+          <dt>Simulation</dt>
+          <dd>PLECS, PSIM, MATLAB/Simulink, TINA-TI</dd>
+        </div>
+        <div>
+          <dt>Automation</dt>
+          <dd>PLC programming in Ladder, STL and FBD, Ignition SCADA</dd>
+        </div>
+        <div>
+          <dt>Tools and lab</dt>
+          <dd>Git, CI/CD, Linux, oscilloscopes, logic analysers, power analysers</dd>
+        </div>
+      </dl>
+    </section>
+
+    <section class="section" id="education" aria-labelledby="edu-h">
+      <h2 id="edu-h">Education</h2>
+      <div class="edu">
+        <div>
+          <h3>BSc Engineering (Hons), Electrical and Electronic Engineering</h3>
+          <p>University of Peradeniya, 2021 – 2025</p>
+        </div>
+        <div>
+          <h3>Certifications</h3>
+          <ul>
+            <li>Introduction to Linux (LFS101), The Linux Foundation</li>
+            <li>Python Data Structures, Coursera</li>
+            <li>Artificial Intelligence Fundamentals, IBM</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact" id="contact" aria-labelledby="contact-h">
+      <h2 id="contact-h">Contact</h2>
+      <p class="lede">I'm looking for embedded, firmware and systems roles in Sri Lanka or remote. Email is the quickest way to reach me.</p>
+      <a class="email" href="mailto:asintha.99@outlook.com">asintha.99@outlook.com</a>
+      <ul>
+        <li><a href="https://www.linkedin.com/in/asintha-ariyarathne-54450b245/">LinkedIn</a></li>
+        <li><a href="https://github.com/Asi-A99">GitHub</a></li>
+        <li><a href="cv/Asintha_Ariyarathne_CV.pdf">Download CV (PDF)</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>© 2026 Asintha Ariyarathne</footer>
+</div>
+</body>
+</html>
