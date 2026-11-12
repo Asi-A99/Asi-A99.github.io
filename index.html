@@ -108,22 +108,8 @@
     padding: clamp(.5rem, 1.5vw, .9rem);
     box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .06), 0 18px 40px -24px rgba(15, 43, 48, .55);
   }
-  .scope svg { display: block; width: 100%; height: auto; }
-  .scope .g { stroke: var(--grid); stroke-width: 1; }
-  .scope .g-mid { stroke: var(--grid-mid); }
-  .scope .frame { fill: none; stroke: var(--grid-mid); stroke-width: 1.5; }
-  .scope .pwm { fill: none; stroke: var(--ch2); stroke-width: 1.6; stroke-linejoin: miter; opacity: .9; }
-  .scope .sine { fill: none; stroke: var(--ch1); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
-  .scope text { font-family: var(--display); font-weight: 500; font-size: 19px; }
-  .scope .t1 { fill: var(--ch1); }
-  .scope .t2 { fill: var(--ch2); }
-  .scope .t3 { fill: rgba(220, 238, 240, .7); }
+  .scope canvas { display: block; width: 100%; height: auto; aspect-ratio: 600 / 320; }
   .scope-fig figcaption { color: var(--muted); font-size: .92rem; margin-top: .75rem; max-width: 36rem; }
-  @media (prefers-reduced-motion: no-preference) {
-    .scope .trace { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 2s cubic-bezier(.4, 0, .2, 1) .25s forwards; }
-    .scope .sine.trace { animation-duration: 1.4s; animation-delay: 1.6s; }
-    @keyframes draw { to { stroke-dashoffset: 0; } }
-  }
 
   /* Sections */
   .section { border-top: 1px solid var(--rule); padding-block: clamp(3rem, 7vw, 4.5rem); scroll-margin-top: 1rem; }
@@ -256,39 +242,30 @@
 
       <figure class="scope-fig">
         <div class="scope">
-          <svg viewBox="0 0 600 320" role="img" aria-labelledby="scope-title">
-            <title id="scope-title">Oscilloscope view of a three-level PWM signal and the sine wave it averages to</title>
-            <line class="g" x1="60" y1="0" x2="60" y2="320"/>
-            <line class="g" x1="120" y1="0" x2="120" y2="320"/>
-            <line class="g" x1="180" y1="0" x2="180" y2="320"/>
-            <line class="g" x1="240" y1="0" x2="240" y2="320"/>
-            <line class="g g-mid" x1="300" y1="0" x2="300" y2="320"/>
-            <line class="g" x1="360" y1="0" x2="360" y2="320"/>
-            <line class="g" x1="420" y1="0" x2="420" y2="320"/>
-            <line class="g" x1="480" y1="0" x2="480" y2="320"/>
-            <line class="g" x1="540" y1="0" x2="540" y2="320"/>
-            <line class="g" x1="0" y1="40" x2="600" y2="40"/>
-            <line class="g" x1="0" y1="80" x2="600" y2="80"/>
-            <line class="g" x1="0" y1="120" x2="600" y2="120"/>
-            <line class="g g-mid" x1="0" y1="160" x2="600" y2="160"/>
-            <line class="g" x1="0" y1="200" x2="600" y2="200"/>
-            <line class="g" x1="0" y1="240" x2="600" y2="240"/>
-            <line class="g" x1="0" y1="280" x2="600" y2="280"/>
-            <rect class="frame" x="0.75" y="0.75" width="598.5" height="318.5" rx="2"/>
-            <path class="pwm trace" pathLength="1" d="M0 160.0H17.1V60.0H24.2V160.0H34.4V60.0H47.1V160.0H52.4V60.0H68.4V160.0H71.5V60.0H88.2V160.0H92.0V60.0H106.7V160.0H114.2V60.0H124.3V160.0H137.9V60.0H141.5V160.0H158.5V260.0H162.2V160.0H175.7V260.0H185.8V160.0H193.4V260.0H208.0V160.0H211.9V260.0H228.5V160.0H231.6V260.0H247.6V160.0H253.0V260.0H265.7V160.0H275.9V260.0H283.0V160.0H317.1V60.0H324.2V160.0H334.4V60.0H347.1V160.0H352.5V60.0H368.5V160.0H371.6V60.0H388.2V160.0H392.1V60.0H406.7V160.0H414.3V60.0H424.4V160.0H437.9V60.0H441.6V160.0H458.5V260.0H462.2V160.0H475.7V260.0H485.8V160.0H493.4V260.0H508.0V160.0H511.9V260.0H528.5V160.0H531.6V260.0H547.6V160.0H553.0V260.0H565.7V160.0H575.9V260.0H583.0V160.0H600"/>
-            <polyline class="sine trace" pathLength="1" points="0,160.0 3,154.7 6,149.3 9,144.1 12,138.9 15,133.7 18,128.7 21,123.8 24,119.1 27,114.5 30,110.0 33,105.8 36,101.8 39,98.0 42,94.5 45,91.2 48,88.2 51,85.5 54,83.1 57,81.0 60,79.2 63,77.7 66,76.5 69,75.7 72,75.2 75,75.0 78,75.2 81,75.7 84,76.5 87,77.7 90,79.2 93,81.0 96,83.1 99,85.5 102,88.2 105,91.2 108,94.5 111,98.0 114,101.8 117,105.8 120,110.0 123,114.5 126,119.1 129,123.8 132,128.7 135,133.7 138,138.9 141,144.1 144,149.3 147,154.7 150,160.0 153,165.3 156,170.7 159,175.9 162,181.1 165,186.3 168,191.3 171,196.2 174,200.9 177,205.5 180,210.0 183,214.2 186,218.2 189,222.0 192,225.5 195,228.8 198,231.8 201,234.5 204,236.9 207,239.0 210,240.8 213,242.3 216,243.5 219,244.3 222,244.8 225,245.0 228,244.8 231,244.3 234,243.5 237,242.3 240,240.8 243,239.0 246,236.9 249,234.5 252,231.8 255,228.8 258,225.5 261,222.0 264,218.2 267,214.2 270,210.0 273,205.5 276,200.9 279,196.2 282,191.3 285,186.3 288,181.1 291,175.9 294,170.7 297,165.3 300,160.0 303,154.7 306,149.3 309,144.1 312,138.9 315,133.7 318,128.7 321,123.8 324,119.1 327,114.5 330,110.0 333,105.8 336,101.8 339,98.0 342,94.5 345,91.2 348,88.2 351,85.5 354,83.1 357,81.0 360,79.2 363,77.7 366,76.5 369,75.7 372,75.2 375,75.0 378,75.2 381,75.7 384,76.5 387,77.7 390,79.2 393,81.0 396,83.1 399,85.5 402,88.2 405,91.2 408,94.5 411,98.0 414,101.8 417,105.8 420,110.0 423,114.5 426,119.1 429,123.8 432,128.7 435,133.7 438,138.9 441,144.1 444,149.3 447,154.7 450,160.0 453,165.3 456,170.7 459,175.9 462,181.1 465,186.3 468,191.3 471,196.2 474,200.9 477,205.5 480,210.0 483,214.2 486,218.2 489,222.0 492,225.5 495,228.8 498,231.8 501,234.5 504,236.9 507,239.0 510,240.8 513,242.3 516,243.5 519,244.3 522,244.8 525,245.0 528,244.8 531,244.3 534,243.5 537,242.3 540,240.8 543,239.0 546,236.9 549,234.5 552,231.8 555,228.8 558,225.5 561,222.0 564,218.2 567,214.2 570,210.0 573,205.5 576,200.9 579,196.2 582,191.3 585,186.3 588,181.1 591,175.9 594,170.7 597,165.3 600,160.0"/>
-            <text class="t1" x="12" y="27">CH1 sine reference</text>
-            <text class="t2" x="588" y="27" text-anchor="end">CH2 inverter output</text>
-            <text class="t3" x="12" y="306">Three-level PWM, m = 0.85</text>
-          </svg>
+          <canvas class="scope-canvas" width="600" height="320" role="img" aria-label="Oscilloscope view of a UART serial signal, decoded byte by byte into text: hello, world; U-Boot 2026.10; Starting kernel; end0: link up; router online"></canvas>
         </div>
-        <figcaption>Three-level PWM and the sine it averages to: the switching pattern behind the GaN inverter below.</figcaption>
+        <figcaption>A UART line on CH1, decoded byte by byte: the signal on the wire and the text it carries.</figcaption>
       </figure>
     </section>
 
     <section class="section" id="work" aria-labelledby="work-h">
       <h2 id="work-h">Projects</h2>
-      <p class="lede">Hardware and firmware I designed, built and debugged, from control loops to the copper they run on.</p>
+      <p class="lede">Hardware, firmware and embedded Linux systems I designed, built and debugged, from control loops to the copper they run on.</p>
+
+      <article class="project">
+        <figure class="shot">
+          <img src="images/bbb-router.jpg" alt="BeagleBone Black edge router with a serial console adapter and a USB Ethernet WAN adapter" onerror="this.parentElement.classList.add('missing')">
+          <figcaption class="ph">Add a photo: images/bbb-router.jpg</figcaption>
+        </figure>
+        <div>
+          <h3>BeagleBone Black edge router</h3>
+          <p class="context">Embedded Linux and networking project, 2026</p>
+          <p>A BeagleBone Black turned into a working edge router, built from the bootloader up. It boots my own U-Boot and Linux 6.18 kernel over TFTP, routes and NATs between LAN and WAN behind an nftables firewall with separate office and guest VLANs, and runs OSPF and BGP with FRR. I added a netfilter kernel module, eBPF/XDP packet filters, a C tool that talks rtnetlink and a Rust tool cross-compiled for ARM.</p>
+          <p>I profiled the single 1 GHz core with perf: dropping a packet flood in XDP cost about 10 µs per packet against 22 µs in nftables, and one nftables set replaced 500 linear rules at almost no cost. The firewall is tested in Linux network namespaces and on the real board, with CI on every push, a lintian-checked Debian package and DKMS for the kernel module.</p>
+          <p class="built"><strong>Built with</strong> U-Boot, Linux kernel, C, Rust, Python and pytest, eBPF/XDP, nftables, FRR, perf, GitHub Actions, Debian packaging</p>
+          <p><a href="https://github.com/Asi-A99/bbb-router">Project files on GitHub</a></p>
+        </div>
+      </article>
 
       <article class="project">
         <figure class="shot">
@@ -439,6 +416,10 @@
           <dd>Yocto Project and BitBake meta-layers, U-Boot, TF-A, RCW/PBI, Linux kernel drivers, device tree, secure boot</dd>
         </div>
         <div>
+          <dt>Linux networking</dt>
+          <dd>nftables, VLANs, FRR (OSPF, BGP), rtnetlink, eBPF/XDP, network namespaces, perf and ftrace</dd>
+        </div>
+        <div>
           <dt>Firmware</dt>
           <dd>C and C++, TI C2000 with CLA, ESP32 with ESP-IDF, RTOS, interrupt-driven state machines</dd>
         </div>
@@ -464,7 +445,7 @@
         </div>
         <div>
           <dt>Tools and lab</dt>
-          <dd>Git, CI/CD, Linux, oscilloscopes, logic analysers, power analysers</dd>
+          <dd>Git, GitHub Actions, pytest, Debian packaging, DKMS, oscilloscopes, logic analysers, power analysers</dd>
         </div>
       </dl>
     </section>
@@ -501,5 +482,156 @@
 
   <footer>© 2026 Asintha Ariyarathne</footer>
 </div>
+<script>
+/* Hero animation: a UART line on CH1, decoded byte by byte.
+   Draws on a 600 x 320 grid that matches the oscilloscope frame.
+   Visitors who prefer reduced motion get a single still frame. */
+(function () {
+  'use strict';
+  const canvas = document.querySelector('canvas.scope-canvas');
+  if (!canvas || !canvas.getContext) return;
+  const ctx = canvas.getContext('2d');
+  const W = 600, H = 320;
+  const css = getComputedStyle(document.documentElement);
+  const v = (n, fb) => (css.getPropertyValue(n).trim() || fb);
+  const C = {
+    scope: v('--scope', '#0F2B30'),
+    ch1: v('--ch1', '#F2C230'),
+    ch2: v('--ch2', '#52D3DB'),
+    grid: v('--grid', 'rgba(190, 226, 228, 0.13)'),
+    gridMid: v('--grid-mid', 'rgba(190, 226, 228, 0.32)'),
+    text: 'rgba(220, 238, 240, 0.72)',
+    bright: 'rgba(232, 244, 245, 0.95)',
+    display: v('--display', '"Barlow Condensed", "Arial Narrow", sans-serif'),
+    mono: 'ui-monospace, "DejaVu Sans Mono", "Liberation Mono", Menlo, Consolas, monospace',
+  };
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function alpha(hex, a) {
+    const m = /^#?([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i.exec(hex);
+    return m ? `rgba(${parseInt(m[1], 16)}, ${parseInt(m[2], 16)}, ${parseInt(m[3], 16)}, ${a})` : hex;
+  }
+  function line(x0, y0, x1, y1) { ctx.beginPath(); ctx.moveTo(x0, y0); ctx.lineTo(x1, y1); ctx.stroke(); }
+  function rrect(x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath();
+  }
+  function label(txt, x, y, color, align) {
+    ctx.font = `500 19px ${C.display}`; ctx.fillStyle = color; ctx.textAlign = align || 'left';
+    ctx.textBaseline = 'alphabetic'; ctx.fillText(txt, x, y);
+  }
+
+  // Build the bit stream: idle high, start bit low, 8 data bits LSB first, stop bit high.
+  const msgs = ['hello, world', 'U-Boot 2026.10', 'Starting kernel ...', 'end0: link up', 'router online'];
+  const BIT = 5, CHAR = 60, GAP = 240, SPEED = 150, TRIG = 300, HI = 80, LO = 128;
+  const cells = [], bytes = [], starts = [];
+  let x = GAP;
+  cells.push({ x0: 0, x1: GAP, l: 1 });
+  msgs.forEach((m, mi) => {
+    starts.push(x);
+    for (const ch of m) {
+      const code = ch.charCodeAt(0);
+      const bits = [0];
+      for (let b = 0; b < 8; b++) bits.push((code >> b) & 1);
+      bits.push(1);
+      bits.forEach((bit, i) => cells.push({ x0: x + i * BIT, x1: x + (i + 1) * BIT, l: bit }));
+      bytes.push({ x0: x, x1: x + 10 * BIT, ch, code, mi });
+      cells.push({ x0: x + 10 * BIT, x1: x + CHAR, l: 1 });
+      x += CHAR;
+    }
+    cells.push({ x0: x, x1: x + GAP, l: 1 });
+    x += GAP;
+  });
+  const L = x;
+
+  function draw(t) {
+    // Grid and frame
+    ctx.fillStyle = C.scope; ctx.fillRect(0, 0, W, H);
+    ctx.lineWidth = 1;
+    for (let gx = 60; gx < W; gx += 60) { ctx.strokeStyle = gx === 300 ? C.gridMid : C.grid; line(gx + .5, 0, gx + .5, H); }
+    for (let gy = 40; gy < H; gy += 40) { ctx.strokeStyle = gy === 160 ? C.gridMid : C.grid; line(0, gy + .5, W, gy + .5); }
+    ctx.strokeStyle = C.gridMid; ctx.lineWidth = 1.5; ctx.strokeRect(.75, .75, W - 1.5, H - 1.5);
+
+    const off = (t * SPEED) % L;
+
+    // CH1: the waveform
+    ctx.beginPath(); ctx.strokeStyle = C.ch1; ctx.lineWidth = 2.5; ctx.lineJoin = 'miter';
+    let first = true;
+    for (const base of [-L, 0, L]) {
+      for (const c of cells) {
+        const a = c.x0 + base - off, b = c.x1 + base - off;
+        if (b < 0 || a > W) continue;
+        const y = c.l ? HI : LO;
+        if (first) { ctx.moveTo(Math.max(a, 0), y); first = false; } else ctx.lineTo(a, y);
+        ctx.lineTo(Math.min(b, W), y);
+      }
+    }
+    ctx.stroke();
+
+    // Decoder lane: one box per byte, bright once it has passed the trigger
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    for (const base of [-L, 0, L]) {
+      for (const b of bytes) {
+        const a = b.x0 + base - off, e = b.x1 + base - off;
+        if (e < 0 || a > W) continue;
+        const done = e <= TRIG;
+        ctx.strokeStyle = done ? C.ch2 : alpha(C.ch2, .3); ctx.lineWidth = 1.5;
+        rrect(a + 1, 150, e - a - 2, 38, 5); ctx.stroke();
+        ctx.font = `600 22px ${C.display}`; ctx.fillStyle = done ? C.ch2 : alpha(C.ch2, .4);
+        ctx.fillText(b.ch === ' ' ? '␣' : b.ch, (a + e) / 2, 170);
+        ctx.font = `500 13px ${C.display}`; ctx.fillStyle = done ? C.text : 'rgba(220, 238, 240, .35)';
+        ctx.fillText('0x' + b.code.toString(16).toUpperCase().padStart(2, '0'), (a + e) / 2, 205);
+      }
+    }
+
+    // Trigger marker
+    ctx.save(); ctx.setLineDash([4, 5]); ctx.strokeStyle = 'rgba(220, 238, 240, .45)'; ctx.lineWidth = 1;
+    line(TRIG + .5, 50, TRIG + .5, 222); ctx.restore();
+    ctx.fillStyle = 'rgba(220, 238, 240, .6)';
+    ctx.beginPath(); ctx.moveTo(TRIG - 6, 44); ctx.lineTo(TRIG + 6, 44); ctx.lineTo(TRIG, 52); ctx.closePath(); ctx.fill();
+
+    // Terminal: the text decoded so far
+    let p = off + TRIG; if (p >= L) p -= L;
+    let mi = -1;
+    for (let i = 0; i < starts.length; i++) if (starts[i] <= p) mi = i;
+    const txt = mi < 0 ? msgs[msgs.length - 1]
+      : bytes.filter(b => b.mi === mi && b.x1 <= p).map(b => b.ch).join('');
+    ctx.strokeStyle = C.gridMid; ctx.lineWidth = 1; rrect(12.5, 236.5, W - 25, 44, 4); ctx.stroke();
+    ctx.font = `500 19px ${C.mono}`; ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+    ctx.fillStyle = C.text; ctx.fillText('rx>', 26, 259);
+    ctx.fillStyle = C.bright; ctx.fillText(txt, 72, 259);
+    if (reduce || Math.floor(t * 2) % 2 === 0) {
+      ctx.fillStyle = C.ch2; ctx.fillRect(74 + ctx.measureText(txt).width, 248, 10, 22);
+    }
+
+    label('CH1 UART TX · 115200 8N1', 12, 27, C.ch1);
+    label('Decoder', W - 12, 27, C.ch2, 'right');
+    label('Start bit, 8 data bits LSB first, stop bit', 12, 306, 'rgba(220, 238, 240, .7)');
+  }
+
+  const STILL = 5.3;          // a moment when "hello, world" is fully decoded
+  let raf = 0, t0 = performance.now(), visible = true;
+  function size() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2), w = canvas.clientWidth || W;
+    canvas.width = Math.round(w * dpr); canvas.height = Math.round(w * H / W * dpr);
+    ctx.setTransform(canvas.width / W, 0, 0, canvas.height / H, 0, 0);
+  }
+  function frame(now) {
+    draw(reduce ? STILL : (now - t0) / 1000);
+    if (!reduce && visible) raf = requestAnimationFrame(frame);
+  }
+  size(); frame(performance.now());
+  window.addEventListener('resize', () => { size(); if (reduce || !visible) frame(performance.now()); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { if (reduce) frame(performance.now()); });
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(([e]) => {
+      visible = e.isIntersecting;
+      cancelAnimationFrame(raf);
+      if (visible && !reduce) raf = requestAnimationFrame(frame);
+    }).observe(canvas);
+  }
+})();
+</script>
 </body>
 </html>
