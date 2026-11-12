@@ -250,7 +250,7 @@
 
     <section class="section" id="work" aria-labelledby="work-h">
       <h2 id="work-h">Projects</h2>
-      <p class="lede">Hardware, firmware and embedded Linux systems I designed, built and debugged, from control loops to the copper they run on.</p>
+      <p class="lede">Followings are some hardware, firmware and embedded linux systems projects I have built and debugged</p>
 
       <article class="project">
         <figure class="shot">
@@ -260,9 +260,9 @@
         <div>
           <h3>BeagleBone Black edge router</h3>
           <p class="context">Embedded Linux and networking project, 2026</p>
-          <p>A BeagleBone Black turned into a working edge router, built from the bootloader up. It boots my own U-Boot and Linux 6.18 kernel over TFTP, routes and NATs between LAN and WAN behind an nftables firewall with separate office and guest VLANs, and runs OSPF and BGP with FRR. I added a netfilter kernel module, eBPF/XDP packet filters, a C tool that talks rtnetlink and a Rust tool cross-compiled for ARM.</p>
-          <p>I profiled the single 1 GHz core with perf: dropping a packet flood in XDP cost about 10 µs per packet against 22 µs in nftables, and one nftables set replaced 500 linear rules at almost no cost. The firewall is tested in Linux network namespaces and on the real board, with CI on every push, a lintian-checked Debian package and DKMS for the kernel module.</p>
-          <p class="built"><strong>Built with</strong> U-Boot, Linux kernel, C, Rust, Python and pytest, eBPF/XDP, nftables, FRR, perf, GitHub Actions, Debian packaging</p>
+          <p>A BeagleBone Black turned into a working edge router, built from the bootloader up. It boots own U-Boot and Linux 6.18 kernel over TFTP, routes and NATs between LAN and WAN behind an nftables firewall with separate office and guest VLANs, and runs OSPF and BGP with FRR. I added a netfilter kernel module, eBPF/XDP packet filters, a C tool that talks rtnetlink cross-compiled for ARM.</p>
+          <p>The firewall is tested in linux network namespaces and on the real board, with CI on every push, a lintian-checked Debian package and DKMS for the kernel module.</p>
+          <p class="built"><strong>Built with</strong> U-Boot, Linux kernel, C, Python and pytest, eBPF/XDP, nftables, FRR, perf, GitHub Actions, Debian packaging</p>
           <p><a href="https://github.com/Asi-A99/bbb-router">Project files on GitHub</a></p>
         </div>
       </article>
